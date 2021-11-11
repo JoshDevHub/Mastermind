@@ -7,9 +7,10 @@ require_relative 'player'
 class CodeBreaker < Player
   def make_guess
     p 'Input four numbers between 1 and 6 to make your guess'
-    gets.chomp.downcase.delete(' ').split(' ')
+    gets.chomp.downcase.delete(' ').split('')
   end
 end
 
-player = CodeBreaker.new('player_one')
-p player.make_guess
+# test
+# player = CodeBreaker.new('player_one')
+# p player.verify_code(%w[1 2 3 7])
