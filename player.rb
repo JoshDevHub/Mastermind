@@ -14,8 +14,3 @@ class Player
     self.score += 1
   end
 end
-
-# test
-player_one = Player.new('player_one')
-player_one.increment_score
-p player_one.score
