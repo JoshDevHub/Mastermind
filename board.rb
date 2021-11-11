@@ -2,6 +2,8 @@
 
 # Game board class
 class Board
+  attr_reader :code
+
   def initialize(code)
     @code = code
   end
@@ -16,10 +18,16 @@ class Board
       none: (4 - (imp_matches + matches))
     }
   end
+
+  def format_response(response)
+    p "Perfect matches: #{response[:matches]}"
+    p "Imperfect matches: #{response[:imp_matches]}"
+    p "Matched none: #{response[:none]}"
+  end
 end
 
 # test
-my_code = [1, 2, 3, 4]
-my_board = Board.new(my_code)
-new_guess = [1, 5, 2, 4]
-p my_board.guess_response(new_guess)
+# my_code = [1, 2, 3, 4]
+# my_board = Board.new(my_code)
+# new_guess = [1, 5, 2, 4]
+# p my_board.guess_response(new_guess)
