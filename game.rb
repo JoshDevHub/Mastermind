@@ -6,7 +6,7 @@ require_relative 'board'
 
 # Game Class that holds logic for progressing & deciding the game
 class Game
-  attr_reader :player_one, :player_two
+  attr_accessor :player_one, :player_two
 
   def initialize(player_one, player_two)
     @player_one = CodeMaker.new(player_one)
