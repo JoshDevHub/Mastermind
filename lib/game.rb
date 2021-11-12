@@ -7,13 +7,13 @@ require_relative 'board'
 # Game Class that holds logic for progressing & deciding the game
 class Game
   attr_accessor :player_one, :player_two
-  attr_reader :end_game
+  attr_reader :game_over
 
   def initialize(player_one, player_two)
     @player_one = CodeMaker.new(player_one)
     @player_two = CodeBreaker.new(player_two)
     @round_number = 0
-    @end_game = false
+    @game_over = false
   end
 
   def increment_round
@@ -25,7 +25,12 @@ class Game
   end
 
   def check_win_condition(board_code, code_guess)
-    @end_game = true if @round_number > 12 || board_code == code_guess
+    @game_over = true if @round_number > 12 || board_code.split('') == code_guess
+  end
+
+  def end_game
+    p "#{@player_two.name} has guessed correctly!"
+    p "#{@player_one.name} gets #{@player_one.score}."
   end
 end
 
