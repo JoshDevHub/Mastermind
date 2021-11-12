@@ -2,9 +2,7 @@
 
 # Display Class that holds logic for the command line UI
 class Display
-  def initialize(player)
-    @player_name = player
-    @computer = 'Computer'
+  def initialize
     @rules = <<~HEREDOC
       The rules are as follows: the game has two roles: a Code Master and a
       Code Breaker. The Code Master creates a code of their choosing by selecting
@@ -30,7 +28,11 @@ class Display
   end
 
   def order_query
-    puts 'Who should be Code Master first, you or the computer?'
+    puts 'Would you like to be Code Master first? Y/n'
+  end
+
+  def alt_order_query
+    puts 'Invalid input. Would you like to be Code Master first? Y/n'
   end
 
   def give_round_feedback(response)
@@ -38,8 +40,12 @@ class Display
     puts "Imperfect Matches: #{response[:imp_matches]}"
     puts "None: #{response[:none]}"
   end
+
+  def end_round(player_one, player_two)
+    puts "#{player_one.name} got #{player_one.score} points this round."
+    puts "The players will now switch roles. #{player_one.name} will be the Code"
+    puts "Breaker and #{player_two.name} will be the Code Maker"
+  end
 end
 
 # test
-display = Display.new('Josh')
-display.give_round_feedback({ matches: 2, imp_matches: 1, none: 1 })

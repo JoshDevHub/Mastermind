@@ -4,7 +4,7 @@ require 'pry-byebug'
 require_relative 'lib/game'
 
 # main script to be run here
-my_game = Game.new('computer', 'Josh')
+my_game = Game.new('Computer', 'Josh')
 new_board = my_game.create_board
 loop do
   binding.pry
@@ -23,3 +23,4 @@ end
 # TODO
 #   Give feedback for the round ending. Tell the # of Points
 #   Give more information each round. Include the round counter
+#   More Planning / Refactor before progress !!!
