@@ -5,14 +5,14 @@ class Board
   attr_reader :code
 
   def initialize(code)
-    @code = code
+    @code = code.split('')
   end
 
   def guess_response(guess)
     # return hash with perfect matches, imperfect matches, and empties
     matches = guess.map.with_index { |element, index| element == @code[index] || element }
     match_count = matches.count(true)
-    code_clone = @code.split('').reject.with_index { |element, index| element == guess[index] }
+    code_clone = @code.reject.with_index { |element, index| element == guess[index] }
     imp_matches = matches.count { |element| code_clone.include?(element) }
     {
       matches: match_count,

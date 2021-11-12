@@ -25,7 +25,7 @@ class Game
   end
 
   def check_win_condition(board_code, code_guess)
-    @game_over = true if @round_number > 12 || board_code.split('') == code_guess
+    @game_over = true if @round_number > 12 || board_code == code_guess
   end
 
   def end_game
