@@ -6,6 +6,13 @@ require_relative 'lib/game'
 # main script to be run here
 my_game = Game.new('User Name')
 my_game.start_game
+game_board = my_game.create_board
+loop do
+  my_game.play_round(game_board)
+  break if my_game.game_over
+end
+
+# my_game.play_round(game_board)
 # new_board = my_game.create_board
 # Refactoring Game Loop. Commented out for reference while refactoring
 # loop do

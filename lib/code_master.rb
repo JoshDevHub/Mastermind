@@ -10,10 +10,6 @@ module CodeMaster
     end
     code
   end
-
-  def test_method
-    puts 'This is a test'
-  end
 end
 
 # test

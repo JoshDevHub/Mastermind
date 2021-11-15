@@ -4,7 +4,6 @@
 # for how the Code Breaker plays
 module CodeBreaker
   def make_guess
-    p 'Input four numbers between 1 and 6 to make your guess'
     input = gets_user_input
     return input if valid_input?(input)
 

@@ -35,6 +35,10 @@ class Display
     puts 'Invalid input. Would you like to be Code Master first? Y/n'
   end
 
+  def code_query
+    puts 'Code Breaker, enter your guess for a code.'
+  end
+
   def give_round_feedback(response)
     puts "Perfect Matches: #{response[:matches]}"
     puts "Imperfect Matches: #{response[:imp_matches]}"

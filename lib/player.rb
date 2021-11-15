@@ -24,3 +24,7 @@ class Player
 end
 
 # test
+# my_player = Player.new('Josh')
+# my_player.extend CodeMaster
+# my_player.test_method
+# p my_player.methods.include?

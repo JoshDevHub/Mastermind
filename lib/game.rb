@@ -56,7 +56,7 @@ class Game
     @round_number += 1
   end
 
-  def create_board(code = @player_one.make_code)
+  def create_board(code = @player_two.make_code)
     Board.new(code)
   end
 
@@ -68,6 +68,18 @@ class Game
     @game_display.introduction
     player_choice = player_order
     control_player_order(player_choice)
+  end
+
+  def play_round(board)
+    @game_display.code_query
+    if @player_one.methods.include? :make_code
+      puts 'Placeholder logic'
+    else
+      code_guess = @player_one.make_guess
+      response = board.guess_response(code_guess)
+      @game_display.give_round_feedback(response)
+      check_win_condition(board.code, code_guess)
+    end
   end
 
   def end_game
