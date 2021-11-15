@@ -36,13 +36,14 @@ class Display
   end
 
   def code_query
-    puts 'Code Breaker, enter your guess for a code.'
+    puts 'Code Breaker, enter your guess for a code.' # TODO: Add round number to this query
   end
 
   def create_master_code
     puts 'What code would you like the Computer to try to guess?'
   end
 
+  # FIXME: Bug in this currently that needs to be tracked down. Player scores stay at 0.
   def update_between_games(player_one, player_two)
     puts "#{player_two.name} scored #{player_two.score} points that game."\
     "We will now switch sides and #{player_one.name} will be the Code Master."
