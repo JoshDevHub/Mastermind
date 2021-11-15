@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'code_input'
+
 # CodeMaster Module that is selectively applied to Player Class and holds logic
 # for how the Code Master plays the game
 module CodeMaster
+  include CodeInput
+
   def make_code
     code = ''
     4.times do
