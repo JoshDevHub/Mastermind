@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'code_maker'
+require_relative 'code_master'
 require_relative 'code_breaker'
+require_relative 'player'
 require_relative 'board'
 require_relative 'display'
 
@@ -10,9 +11,9 @@ class Game
   attr_accessor :player_one, :player_two
   attr_reader :game_over, :game_display
 
-  def initialize(player_one, player_two)
-    @player_one = CodeMaker.new(player_one)
-    @player_two = CodeBreaker.new(player_two)
+  def initialize(player_name)
+    @player_one = Player.new(player_name)
+    @player_two = Player.new('Computer')
     @round_number = 0
     @game_over = false
     @game_display = Display.new
@@ -41,6 +42,16 @@ class Game
     correct_input
   end
 
+  def control_player_order(order)
+    if order == 'y'
+      @player_one.extend CodeMaster
+      @player_two.extend CodeBreaker
+    else
+      @player_one.extend CodeBreaker
+      @player_two.extend CodeMaster
+    end
+  end
+
   def increment_round
     @round_number += 1
   end
@@ -53,6 +64,12 @@ class Game
     @game_over = true if @round_number > 12 || board_code == code_guess
   end
 
+  def start_game
+    @game_display.introduction
+    player_choice = player_order
+    control_player_order(player_choice)
+  end
+
   def end_game
     puts "#{@player_two.name} has guessed correctly!"
     puts "#{@player_one.name} gets #{@player_one.score}."
@@ -60,6 +77,6 @@ class Game
 end
 
 # test
-my_game = Game.new('Computer', 'Josh')
-# my_game.check_win_condition(13, '1234', '1243')
-p my_game.player_order
+# my_game = Game.new('Computer', 'Josh')
+# # my_game.check_win_condition(13, '1234', '1243')
+# p my_game.player_order

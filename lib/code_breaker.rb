@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'player'
-
-# CodeBreaker class that inherits from Player and holds logic for the player
-# currently guessing the secret code.
-class CodeBreaker < Player
+# CodeBreaker Module that is selectively applied to Player Class and holds logic
+# for how the Code Breaker plays
+module CodeBreaker
   def make_guess
     p 'Input four numbers between 1 and 6 to make your guess'
     input = gets_user_input
@@ -32,7 +30,3 @@ class CodeBreaker < Player
     code.length == 4 && code.all? { |number| '123456'.include?(number) }
   end
 end
-
-# test
-# player = CodeBreaker.new('player_one')
-# p player.make_guess
