@@ -39,6 +39,15 @@ class Display
     puts 'Code Breaker, enter your guess for a code.'
   end
 
+  def create_master_code
+    puts 'What code would you like the Computer to try to guess?'
+  end
+
+  def update_between_games(player_one, player_two)
+    puts "#{player_two.name} scored #{player_two.score} points that game."\
+    "We will now switch sides and #{player_one.name} will be the Code Master."
+  end
+
   def give_round_feedback(response)
     puts "Perfect Matches: #{response[:matches]}"
     puts "Imperfect Matches: #{response[:imp_matches]}"
