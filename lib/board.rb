@@ -5,7 +5,7 @@ class Board
   attr_reader :code
 
   def initialize(code)
-    @code = code.split('')
+    @code = code
   end
 
   def guess_response(guess)

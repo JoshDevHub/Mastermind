@@ -8,15 +8,15 @@ module CodeMaster
   include CodeInput
 
   def make_code
-    code = ''
+    code = []
     4.times do
-      code += rand(1..6).to_s
+      code << rand(1..6).to_s
     end
     code
   end
 end
 
 # test
-# new_computer = CodeMaker.new('computer')
+# new_computer = CodeMaster.new
 # new_code = new_computer.make_code
 # new_code
