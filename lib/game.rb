@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require_relative 'code_master'
-require_relative 'code_breaker'
-require_relative 'player'
+require_relative 'user_player'
+require_relative 'computer_player'
 require_relative 'board'
 require_relative 'display'
 
 # Game Class that holds logic for progressing & deciding the game
 class Game
-  attr_accessor :player_one, :player_two
+  attr_accessor :user_player, :computer_player
   attr_reader :game_over, :game_display
 
   def initialize(player_name)
-    @player_one = Player.new(player_name)
-    @player_two = Player.new('Computer')
+    @user_player = UserPlayer.new(player_name)
+    @computer_player = ComputerPlayer.new('Computer')
     @round_number = 0
     @game_over = false
     @game_display = Display.new
   end
 
+  # TODO: Move following 3 methods to user_player
   def player_order
     @game_display.order_query
     order = gets.chomp.downcase
@@ -44,12 +44,20 @@ class Game
 
   def control_player_order(order)
     if order == 'y'
-      @player_one.extend CodeMaster
-      @player_two.extend CodeBreaker
+      computer_breaker_user_master
     else
-      @player_one.extend CodeBreaker
-      @player_two.extend CodeMaster
+      computer_master_user_breaker
     end
+  end
+
+  def computer_master_user_breaker
+    @player_one.extend CodeBreaker
+    @player_two.extend CodeMaster
+  end
+
+  def computer_breaker_user_master
+    @player_one.extend CodeMaster
+    @player_two.extend CodeBreaker
   end
 
   def increment_round
@@ -75,11 +83,17 @@ class Game
     if @player_one.methods.include? :make_code
       puts 'Placeholder logic'
     else
-      code_guess = @player_one.make_guess
-      response = board.guess_response(code_guess)
-      @game_display.give_round_feedback(response)
-      check_win_condition(board.code, code_guess)
+      play_round_user_breaker(board)
     end
+  end
+
+  def play_round_user_breaker(board)
+    code_guess = @player_one.take_code_input
+    response = board.guess_response(code_guess)
+    @game_display.give_round_feedback(response)
+    check_win_condition(board.code, code_guess)
+    player_one.increment_score
+    increment_round
   end
 
   def end_game
@@ -92,3 +106,7 @@ end
 # my_game = Game.new('Computer', 'Josh')
 # # my_game.check_win_condition(13, '1234', '1243')
 # p my_game.player_order
+
+# TODO: full refactor into the current player dynamic
+# TODO: have the game fully functional with the placeholder of the computer
+#       player guessing the user's code when computer is Breaker.
