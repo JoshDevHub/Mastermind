@@ -10,12 +10,10 @@ class Board
 
   # FIXME: Refactor to be cop compliant and less messy
   def guess_response(guess)
-    # return hash with perfect matches, imperfect matches, and empties
     matches = guess.map.with_index { |element, index| element == @code[index] || element }
     match_count = matches.count(true)
     match_feed = matches.reject.with_index { |element, index| element == true }
     code_clone = @code.reject.with_index { |element, index| element == guess[index] }
-    p code_clone
     imp_matches = find_imperfect_matches(match_feed, code_clone)
     {
       matches: match_count,
