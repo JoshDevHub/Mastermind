@@ -11,8 +11,8 @@ class Game
   attr_accessor :user_player, :computer_player
   attr_reader :game_over, :game_display, :round_number
 
-  def initialize(player_name)
-    @user_player = UserPlayer.new(player_name)
+  def initialize
+    @user_player = UserPlayer.new('User')
     @computer_player = ComputerPlayer.new('Computer')
     @round_number = 1
     @user_first = false
@@ -60,8 +60,12 @@ class Game
 
   def start_game
     @game_display.introduction
-    player_choice = player_order
-    control_player_order(player_choice)
+    gets_user_name
+  end
+
+  def gets_user_name
+    @game_display.user_name_query
+    @user_player.name = gets.chomp
   end
 
   def play_game
@@ -78,19 +82,43 @@ class Game
     end
   end
 
+  def main_game_loop
+    loop do
+      start_game
+      order
+      play_game
+      define_winner
+      break unless play_again?
+    end
+  end
+
   def between_games(master, breaker)
     master.score = @round_number
     @game_display.update_between_games(master, breaker)
+    @round_number = 1
   end
 
-  def end_game
-    puts "#{@player_two.name} has guessed correctly!"
-    puts "#{@player_one.name} gets #{@player_one.score}."
+  # TODO: Move some of this logic to Display
+  def define_winner
+    puts "You scored #{@user_player.score} and the computer scored #{@computer_player.score}."
+    if @user_player.score > @computer_player.score
+      puts 'You WIN!'
+    elsif @user_player.score < @computer_player.score
+      puts 'You lose. The computers are taking over!'
+    else
+      puts 'This game was a draw'
+    end
+  end
+
+  def play_again?
+    puts 'Would you like to play again? Y/n'
+    response = gets.chomp
+    response == 'y'
   end
 end
 
 # test
-my_game = Game.new('Josh')
-my_game.order
-my_game.play_game
-# p my_game.player_order
+# my_game = Game.new('Josh')
+# my_game.order
+# my_game.play_game
+# # p my_game.player_order
