@@ -8,6 +8,7 @@ class Board
     @code = code
   end
 
+  # FIX ME: Flaw in matching!
   def guess_response(guess)
     # return hash with perfect matches, imperfect matches, and empties
     matches = guess.map.with_index { |element, index| element == @code[index] || element }
@@ -19,12 +20,6 @@ class Board
       imp_matches: imp_matches,
       none: 4 - (imp_matches + match_count)
     }
-  end
-
-  def format_response(response)
-    p "Perfect matches: #{response[:matches]}"
-    p "Imperfect matches: #{response[:imp_matches]}"
-    p "Matched none: #{response[:none]}"
   end
 end
 
