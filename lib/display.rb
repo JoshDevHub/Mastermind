@@ -27,6 +27,10 @@ class Display
     puts @rules
   end
 
+  def user_name_query
+    puts 'What is your name?'
+  end
+
   def order_query
     puts 'Would you like to be Code Master first? Y/n'
   end
