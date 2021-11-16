@@ -44,10 +44,9 @@ class Display
     puts 'What code would you like the Computer to try to guess?'
   end
 
-  # FIXME: Bug in this currently that needs to be tracked down. Player scores stay at 0.
-  def update_between_games(player_one, player_two)
-    puts "#{player_two.name} scored #{player_two.score} points that game."\
-    "We will now switch sides and #{player_one.name} will be the Code Master."
+  def update_between_games(code_master, code_breaker)
+    puts "#{code_master.name} scored #{code_master.score} points that game."\
+    "We will now switch sides and #{code_breaker.name} will be the Code Master."
   end
 
   def give_round_feedback(response)
