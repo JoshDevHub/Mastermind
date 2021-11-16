@@ -35,8 +35,9 @@ class Display
     puts 'Invalid input. Would you like to be Code Master first? Y/n'
   end
 
-  def code_query
-    puts 'Code Breaker, enter your guess for a code.' # TODO: Add round number to this query
+  def code_query(round_number)
+    puts "Round Number: #{round_number}"
+    puts 'Code Breaker, enter your guess for a code.'
   end
 
   def create_master_code
