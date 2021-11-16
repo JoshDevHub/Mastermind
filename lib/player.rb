@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'code_master'
-require_relative 'code_breaker'
-
 # Player Class for holding logic related to players
 class Player
   attr_accessor :score
@@ -11,10 +8,6 @@ class Player
   def initialize(name)
     @name = name
     @score = 0
-  end
-
-  def increment_score
-    self.score += 1
   end
 end
 
