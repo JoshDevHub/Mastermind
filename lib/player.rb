@@ -2,8 +2,7 @@
 
 # Player Class for holding logic related to players
 class Player
-  attr_accessor :score
-  attr_reader :name
+  attr_accessor :score, :name
 
   def initialize(name)
     @name = name
