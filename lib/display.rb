@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Look into ways to make the display spacing better. Maybe add colors?
 # Display Class that holds logic for the command line UI
 class Display
   def initialize

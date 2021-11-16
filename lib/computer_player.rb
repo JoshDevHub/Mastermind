@@ -14,6 +14,7 @@ class ComputerPlayer < Player
     code
   end
 
+  # TODO: Build this method
   def solve_code
     puts 'This is a placeholder'
   end

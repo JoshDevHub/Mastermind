@@ -73,12 +73,10 @@ class Game
       round_user_master
       between_games(user_player, computer_player)
       round_computer_master
-      # TODO: End game logic
     else
       round_computer_master
       between_games(computer_player, user_player)
       round_user_master
-      # TODO: End game logic
     end
   end
 
@@ -110,6 +108,7 @@ class Game
     end
   end
 
+  # TODO: sanizite input. rope in the Player method for yes/no responses.
   def play_again?
     puts 'Would you like to play again? Y/n'
     response = gets.chomp
