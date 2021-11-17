@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 require_relative 'player'
+require_relative 'display'
 
 # UserPlayer class that holds the logic for getting user inputs into the game
+# TODO: Move certain things into the Display Module
 class UserPlayer < Player
+  include Display
+
   def take_code_input
     input = gets_user_code_input
     return input if valid_input?(input)

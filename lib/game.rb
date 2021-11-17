@@ -11,12 +11,13 @@ class Game
   attr_accessor :user_player, :computer_player
   attr_reader :game_over, :game_display, :round_number
 
+  include Display
+
   def initialize
     @user_player = UserPlayer.new('User')
     @computer_player = ComputerPlayer.new('Computer')
     @round_number = 1
     @user_first = false
-    @game_display = Display.new
   end
 
   def round_computer_master
@@ -24,24 +25,24 @@ class Game
     new_board = create_board(board_code)
     loop do
       # binding.pry
-      @game_display.code_query(@round_number)
+      code_query(@round_number)
       guess = @user_player.take_code_input
       response_hash = new_board.guess_response(guess)
-      @game_display.give_round_feedback(response_hash)
+      give_round_feedback(response_hash)
       increment_round
       break if check_win_condition(board_code, guess)
     end
   end
 
   def round_user_master
-    @game_display.create_master_code
+    create_master_code
     board_code = @user_player.take_code_input
     new_board = create_board(board_code)
     @computer_player.solve_code
   end
 
   def order
-    @game_display.order_query
+    order_query
     order_response = @user_player.player_order
     @user_first = true if order_response == 'y'
   end
@@ -59,12 +60,12 @@ class Game
   end
 
   def start_game
-    @game_display.introduction
+    introduction
     gets_user_name
   end
 
   def gets_user_name
-    @game_display.user_name_query
+    user_name_query
     @user_player.name = gets.chomp
   end
 
@@ -92,11 +93,11 @@ class Game
 
   def between_games(master, breaker)
     master.score = @round_number
-    @game_display.update_between_games(master, breaker)
+    update_between_games(master, breaker)
     @round_number = 1
   end
 
-  # TODO: Move some of this logic to Display
+  # TODO: Move some of this logic to Display Module
   def define_winner
     puts "You scored #{@user_player.score} and the computer scored #{@computer_player.score}."
     if @user_player.score > @computer_player.score
