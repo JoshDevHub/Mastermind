@@ -1,37 +1,19 @@
 # frozen_string_literal: true
 
+require_relative 'respond_to_code'
+
 # Game board class
 class Board
+  include RespondToCode
+
   attr_reader :code
 
   def initialize(code)
     @code = code
   end
 
-  # FIXME: Refactor to be cop compliant and less messy
-  def guess_response(guess)
-    matches = guess.map.with_index { |element, index| element == @code[index] || element }
-    match_count = matches.count(true)
-    match_feed = matches.reject.with_index { |element, index| element == true }
-    code_clone = @code.reject.with_index { |element, index| element == guess[index] }
-    imp_matches = find_imperfect_matches(match_feed, code_clone)
-    {
-      matches: match_count,
-      imp_matches: imp_matches,
-      none: 4 - (imp_matches + match_count)
-    }
-  end
-
-  def find_imperfect_matches(guess, code_clone)
-    matches = guess.map do |element|
-      if code_clone.include?(element)
-        code_index = code_clone.index(element)
-        element = true
-        code_clone.delete_at(code_index)
-      end
-      element
-    end
-    matches.count(true)
+  def respond_to_master_code_guess(guess)
+    guess_response(code, guess)
   end
 end
 
