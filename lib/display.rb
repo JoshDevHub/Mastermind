@@ -3,7 +3,7 @@
 # TODO: Look into ways to make the display spacing better. Maybe add colors?
 # Display Module that holds logic for the command line UI
 module Display
-  @rules = <<~HEREDOC
+  @@rules = <<~HEREDOC
     The rules are as follows: the game has two roles: a Code Master and a
     Code Breaker. The Code Master creates a code of their choosing by selecting
     four numbers among the digits 1-6. The Code Breaker must try to guess the
@@ -23,7 +23,7 @@ module Display
 
   def introduction_message
     puts 'Welcome to a game of Mastermind!'
-    puts @rules
+    puts @@rules
   end
 
   def query_message
@@ -55,4 +55,3 @@ module Display
     puts "Breaker and #{player_two.name} will be the Code Maker"
   end
 end
-
