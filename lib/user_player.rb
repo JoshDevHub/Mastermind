@@ -8,51 +8,40 @@ require_relative 'display'
 class UserPlayer < Player
   include Display
 
-  def take_code_input
-    input = gets_user_code_input
-    return input if valid_input?(input)
+  def gets_code_input
+    input = gets_user_input.delete(' ').split('')
+    return input if valid_code_input?(input)
 
-    sanitize_user_input
-  end
-
-  def gets_user_code_input
-    gets.chomp.downcase.delete(' ').split('')
-  end
-
-  def sanitize_user_code_input
-    is_valid = false
-    correct_input = ''
-    until is_valid
-      puts 'Invalid input. Please only use four numbers and only use digits between 1 and 6'
-      correct_input = gets_user_input
-      is_valid = valid_input?(correct_input)
+    until valid_code_input?(input)
+      puts error_message[:code_error]
+      input = gets_user_input.delete(' ').split('')
     end
-    correct_input
   end
 
-  def valid_input?(code)
+  def gets_user_input
+    gets.chomp.downcase
+  end
+
+  def valid_code_input?(code)
     code.length == 4 && code.all? { |number| '123456'.include?(number) }
   end
 
-  def player_order
-    order = gets.chomp.downcase
-    sanitize_yes_no_input(order)
+  def gets_yes_no_input
+    input = gets_user_input
+    return input if valid_yes_no_input?(input)
+
+    until valid_yes_no_input?(input)
+      puts error_message[:yes_no_error]
+      input = gets_user_input
+    end
   end
 
   def valid_yes_no_input?(input)
     %w[y n].include?(input)
   end
-
-  def sanitize_yes_no_input(input)
-    return input if valid_yes_no_input?(input)
-
-    correct_input = ''
-    is_valid = false
-    until is_valid
-      puts 'Invalid input. Please use Y or N to respond'
-      correct_input = gets.chomp.downcase
-      is_valid = valid_yes_no_input?(correct_input)
-    end
-    correct_input
-  end
 end
+
+# test_method
+my_player = UserPlayer.new('Josh')
+my_player.gets_code_input
+my_player.gets_yes_no_input
