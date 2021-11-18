@@ -21,48 +21,38 @@ module Display
     second round, the player with the most points wins!
   HEREDOC
 
-  def introduction
+  def introduction_message
     puts 'Welcome to a game of Mastermind!'
     puts @rules
   end
 
-  def user_name_query
-    puts 'What is your name?'
+  def query_message
+    {
+      username_query: 'What is your name?',
+      order_query: 'Would you like to be Code Master first? Y/n',
+      create_code_query: 'Code Master, what would you like the Code Breaker to guess?',
+      guess_code_query: 'Code Breaker, what is your guess for the code?',
+      play_again_query: 'Would you like to play again? Y/n'
+    }
   end
 
-  def order_query
-    puts 'Would you like to be Code Master first? Y/n'
+  def error_message
+    {
+      code_error: 'Invalid input. Please enter 4 numbers using only digits 1-6',
+      yes_no_error: 'Invalid input. Please only use Y or N'
+    }
   end
 
-  def alt_order_query
-    puts 'Invalid input. Would you like to be Code Master first? Y/n'
-  end
-
-  def code_query(round_number)
-    puts "Round Number: #{round_number}"
-    puts 'Code Breaker, enter your guess for a code.'
-  end
-
-  def create_master_code
-    puts 'What code would you like the Computer to try to guess?'
-  end
-
-  def update_between_games(code_master, code_breaker)
-    puts "#{code_master.name} scored #{code_master.score} points that game."\
-    "We will now switch sides and #{code_breaker.name} will be the Code Master."
-  end
-
-  def give_round_feedback(response)
+  def round_feedback_message(response)
     puts "Perfect Matches: #{response[:matches]}"
     puts "Imperfect Matches: #{response[:imp_matches]}"
     puts "None: #{response[:none]}"
   end
 
-  def end_round(player_one, player_two)
+  def between_round_message(player_one, player_two)
     puts "#{player_one.name} got #{player_one.score} points this round."
     puts "The players will now switch roles. #{player_one.name} will be the Code"
     puts "Breaker and #{player_two.name} will be the Code Maker"
   end
 end
 
-# test
