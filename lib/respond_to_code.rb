@@ -2,6 +2,7 @@
 
 # Reponse Module for responding to a code guess.
 module RespondToCode
+  # TODO: Refactor this mess
   def guess_response(code_to_check, guess)
     matches = guess.map.with_index { |element, index| element == code_to_check[index] || element }
     match_count = matches.count(true)

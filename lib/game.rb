@@ -3,7 +3,7 @@
 require 'pry-byebug'
 require_relative 'user_player'
 require_relative 'computer_player'
-require_relative 'board'
+require_relative 'board' # TODO: Do we need this?
 require_relative 'display'
 require_relative 'game_loop'
 
@@ -49,10 +49,12 @@ class Game
     # play again?
   end
 
+  # TODO: Build this method
   def between_games(parameter)
     puts "#{parameter} placeholder"
   end
 
+  # TODO: Build this method
   def end_game(parameter)
     puts "#{parameter} placeholder"
   end

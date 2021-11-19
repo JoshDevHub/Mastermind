@@ -55,3 +55,6 @@ module Display
     puts "Breaker and #{player_two.name} will be the Code Maker"
   end
 end
+
+# TODO: Fix Bugs with how query messages get shown during the game.
+# TODO: Build out display for other features planned in game.
