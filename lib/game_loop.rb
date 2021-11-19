@@ -60,6 +60,7 @@ class GameLoop
     puts 'This is a placeholder'
   end
 
+  # TODO: Contemplate Refactor
   def play_user_master_round
     puts query_message[:create_code_query]
     master_code = user.gets_code_input

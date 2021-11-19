@@ -13,14 +13,22 @@ class Game
   include Display
 
   def initialize
-    @user_player = UserPlayer.new('User') # TODO: More elegant solution for this parameter
-    @computer_player = ComputerPlayer.new('Computer')
+    setup('User')
   end
 
   def start_game
     introduction_message
     puts query_message[:username_query]
     @user_player.name = @user_player.gets_user_input
+  end
+
+  def setup(user_name = 'User')
+    @user_player = UserPlayer.new(user_name)
+    @computer_player = ComputerPlayer.new('Computer')
+  end
+
+  def reset
+    setup(@user_player.name)
   end
 
   def master_first?
@@ -35,17 +43,18 @@ class Game
     response == 'y'
   end
 
-  def test_game_loop
-    # binding.pry
+  # Interface
+  def play_game
     start_game
-    user_master = master_first?
-    first_round = GameLoop.new(user: @user_player, computer: @computer_player, user_master: user_master)
-    first_round.play_round
-    between_games
-    second_round = GameLoop.new(user: @user_player, computer: @computer_player, user_master: !user_master)
-    second_round.play_round
-    end_game
-    # play again?
+    loop do
+      reset
+      user_master = master_first?
+      GameLoop.new(user: @user_player, computer: @computer_player, user_master: user_master).play_round
+      between_games
+      GameLoop.new(user: @user_player, computer: @computer_player, user_master: !user_master).play_round
+      end_game
+      break unless play_again?
+    end
   end
 
   # TODO: Move as much of this to Display as possible
@@ -67,4 +76,4 @@ class Game
   end
 end
 
-Game.new.test_game_loop
+Game.new.play_game

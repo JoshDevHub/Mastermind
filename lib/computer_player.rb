@@ -35,7 +35,6 @@ class ComputerPlayer < Player
     @possibility_space = possibility_space.select { |array| guess_response(guess, array) == response }
   end
 
-  # TODO: Build this method
   def solve_code(guess = %w[1 1 2 2], response = nil)
     return guess if response.nil?
 
