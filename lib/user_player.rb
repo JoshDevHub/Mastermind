@@ -4,7 +4,6 @@ require_relative 'player'
 require_relative 'display'
 
 # UserPlayer class that holds the logic for getting user inputs into the game
-# TODO: Move certain things into the Display Module
 class UserPlayer < Player
   include Display
 
@@ -40,8 +39,3 @@ class UserPlayer < Player
     %w[y n].include?(input)
   end
 end
-
-# test_method
-my_player = UserPlayer.new('Josh')
-my_player.gets_code_input
-my_player.gets_yes_no_input
