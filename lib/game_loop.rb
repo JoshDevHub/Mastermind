@@ -60,10 +60,9 @@ class GameLoop
     puts 'This is a placeholder'
   end
 
-  # TODO: Tell user what the computer guessed after each guess.
   def play_user_master_round
     puts query_message[:create_code_query]
-    master_code = user.gets_code_input # FIXME: Doesn't evaluate correctly if there are errors
+    master_code = user.gets_code_input
     @user.score += 1
     result = first_loop_user_master(master_code)
     return result if game_over?(@user.score, master_code, result[:guess])

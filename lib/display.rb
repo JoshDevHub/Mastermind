@@ -60,6 +60,3 @@ module Display
     puts "The score is User: #{user_score} - Computer: #{computer_score}"
   end
 end
-
-# TODO: Fix Bugs with how query messages get shown during the game.
-# TODO: Build out display for other features planned in game.

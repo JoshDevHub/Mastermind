@@ -34,7 +34,7 @@ class Game
     response = @user_player.gets_yes_no_input
     response == 'y'
   end
-  
+
   def test_game_loop
     # binding.pry
     start_game
