@@ -15,6 +15,7 @@ class UserPlayer < Player
       puts error_message[:code_error]
       input = gets_user_input.delete(' ').split('')
     end
+    input
   end
 
   def gets_user_input
@@ -33,6 +34,7 @@ class UserPlayer < Player
       puts error_message[:yes_no_error]
       input = gets_user_input
     end
+    input
   end
 
   def valid_yes_no_input?(input)
