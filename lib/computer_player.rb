@@ -14,14 +14,16 @@ class ComputerPlayer < Player
   def initialize(name)
     super(name)
     @code_array = (1..6).to_a.map(&:to_s)
-    @possibility_space = []
+    @possibility_space = populate_possibility_space
   end
 
   def populate_possibility_space
-    @code_array.repeated_permutation(4) { |permutation| @possibility_space << permutation }
+    possibility_space = []
+    @code_array.repeated_permutation(4) { |permutation| possibility_space << permutation }
+    possibility_space
   end
 
-  def make_code
+  def create_master_code
     code = []
     4.times do
       code << rand(1..6).to_s
@@ -41,14 +43,3 @@ class ComputerPlayer < Player
     possibility_space.min
   end
 end
-
-# test
-# my_ai = ComputerPlayer.new('Computer')
-# my_ai.code_array
-# my_ai.populate_possibility_space
-# my_ai.possibility_space
-# guess = my_ai.solve_code
-# the_response = my_ai.guess_response(%w[1 2 3 4], %w[1 1 2 2])
-# new_guess = my_ai.solve_code(guess, the_response)
-# new_response = my_ai.guess_response(%w[1 2 3 4], %w[1 2 3 3])
-# p my_ai.solve_code(new_guess, new_response)
