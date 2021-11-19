@@ -29,8 +29,8 @@ class GameLoop
 
   private
 
-  def game_over?(round, master_code, code_guess)
-    master_code == code_guess || round == 12
+  def game_over?(number, master_code, code_guess)
+    master_code == code_guess || number == 12
   end
 
   def loop_computer_master(master_code)
@@ -47,13 +47,13 @@ class GameLoop
   def play_computer_master_round
     master_code = computer.create_master_code
     puts computer_message[:create_code]
-    round = 1
+    @computer.score += 1
     loop do
       guess = loop_computer_master(master_code)[:guess]
-      round += 1
-      break if game_over?(round, master_code, guess)
+      break if game_over?(@computer.score, master_code, guess)
+
+      @computer.score += 1
     end
-    round
   end
 
   def play_user_master_round_test
@@ -63,18 +63,16 @@ class GameLoop
   # TODO: Tell user what the computer guessed after each guess.
   def play_user_master_round
     puts query_message[:create_code_query]
-    master_code = user.gets_code_input
-    round = 1
+    master_code = user.gets_code_input # FIXME: Doesn't evaluate correctly if there are errors
+    @user.score += 1
     result = first_loop_user_master(master_code)
-    round += 1
-    return result if game_over?(round, master_code, result[:guess])
+    return result if game_over?(@user.score, master_code, result[:guess])
 
     loop do
       result = subsequent_loops_user_master(master_code, result[:guess], result[:response])
-      round += 1
-      break if game_over?(round, master_code, result[:guess])
+      @user.score += 1
+      break if game_over?(@user.score, master_code, result[:guess])
     end
-    round
   end
 
   def first_loop_user_master(master_code)

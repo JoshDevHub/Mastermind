@@ -56,10 +56,8 @@ module Display
     puts "None: #{response[:none]}"
   end
 
-  def between_round_message(player_one, player_two)
-    puts "#{player_one.name} got #{player_one.score} points this round."
-    puts "The players will now switch roles. #{player_one.name} will be the Code"
-    puts "Breaker and #{player_two.name} will be the Code Maker"
+  def score_display(user_score, computer_score)
+    puts "The score is User: #{user_score} - Computer: #{computer_score}"
   end
 end
 

@@ -34,28 +34,36 @@ class Game
     response = @user_player.gets_yes_no_input
     response == 'y'
   end
-
+  
   def test_game_loop
     # binding.pry
     start_game
     user_master = master_first?
     first_round = GameLoop.new(user: @user_player, computer: @computer_player, user_master: user_master)
     first_round.play_round
-    # between game
+    between_games
     second_round = GameLoop.new(user: @user_player, computer: @computer_player, user_master: !user_master)
     second_round.play_round
-    # end game
+    end_game
     # play again?
   end
 
-  # TODO: Build this method
-  def between_games(parameter)
-    puts "#{parameter} placeholder"
+  # TODO: Move as much of this to Display as possible
+  def between_games
+    score_display(user_player.score, computer_player.score)
+    puts 'The players will now switch sides.'
   end
 
-  # TODO: Build this method
-  def end_game(parameter)
-    puts "#{parameter} placeholder"
+  # TODO: Move as much of this to Display as possible
+  def end_game
+    score_display(user_player.score, computer_player.score)
+    if user_player.score > computer_player.score
+      puts "You've won the game. Congratulations!"
+    elsif user_player.score < computer_player.score
+      puts "You've lost the game. The computers are taking over!"
+    else
+      puts 'This game was a draw'
+    end
   end
 end
 
