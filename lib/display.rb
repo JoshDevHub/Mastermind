@@ -36,6 +36,13 @@ module Display
     }
   end
 
+  def computer_message(message = nil)
+    {
+      create_code: 'The computer has created a code for you to guess.',
+      computer_guess: "The computer has guessed #{message}"
+    }
+  end
+
   def error_message
     {
       code_error: 'Invalid input. Please enter 4 numbers using only digits 1-6',

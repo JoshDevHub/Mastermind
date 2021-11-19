@@ -45,8 +45,8 @@ class GameLoop
   end
 
   def play_computer_master_round
-    puts query_message[:create_code_query]
     master_code = computer.create_master_code
+    puts computer_message[:create_code]
     round = 1
     loop do
       guess = loop_computer_master(master_code)[:guess]
@@ -60,8 +60,9 @@ class GameLoop
     puts 'This is a placeholder'
   end
 
+  # TODO: Tell user what the computer guessed after each guess.
   def play_user_master_round
-    puts query_message[:guess_code_query]
+    puts query_message[:create_code_query]
     master_code = user.gets_code_input
     round = 1
     result = first_loop_user_master(master_code)
@@ -79,6 +80,7 @@ class GameLoop
   def first_loop_user_master(master_code)
     # binding.pry
     code_guess = computer.solve_code
+    puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
     round_feedback_message(response_hash)
     {
@@ -90,6 +92,7 @@ class GameLoop
   def subsequent_loops_user_master(master_code, guess, response)
     # binding.pry
     code_guess = computer.solve_code(guess, response)
+    puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
     round_feedback_message(response_hash)
     {
