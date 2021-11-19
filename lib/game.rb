@@ -3,7 +3,6 @@
 require 'pry-byebug'
 require_relative 'user_player'
 require_relative 'computer_player'
-require_relative 'board' # TODO: Do we need this?
 require_relative 'display'
 require_relative 'game_loop'
 
