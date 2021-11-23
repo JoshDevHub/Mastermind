@@ -8,7 +8,7 @@ require_relative 'game_loop'
 
 # Game Class that holds logic for progressing & deciding the game
 class Game
-  attr_accessor :user_player, :computer_player
+  attr_reader :user_player, :computer_player
 
   include Display
 
@@ -16,10 +16,24 @@ class Game
     setup('User')
   end
 
+  def play_game
+    start_game
+    loop do
+      reset
+      user_master = user_player.master_first?
+      GameLoop.new(user: @user_player, computer: @computer_player, user_master: user_master).play_round
+      between_games
+      GameLoop.new(user: @user_player, computer: @computer_player, user_master: !user_master).play_round
+      end_game
+      break unless user_player.play_again?
+    end
+  end
+
+  private
+
   def start_game
     introduction_message
-    puts query_message[:username_query]
-    @user_player.name = @user_player.gets_user_input
+    @user_player.input_username
   end
 
   def setup(user_name = 'User')
@@ -29,32 +43,6 @@ class Game
 
   def reset
     setup(@user_player.name)
-  end
-
-  def master_first?
-    puts query_message[:order_query]
-    order_response = @user_player.gets_yes_no_input
-    order_response == 'y'
-  end
-
-  def play_again?
-    puts query_message[:play_again_query]
-    response = @user_player.gets_yes_no_input
-    response == 'y'
-  end
-
-  # Interface
-  def play_game
-    start_game
-    loop do
-      reset
-      user_master = master_first?
-      GameLoop.new(user: @user_player, computer: @computer_player, user_master: user_master).play_round
-      between_games
-      GameLoop.new(user: @user_player, computer: @computer_player, user_master: !user_master).play_round
-      end_game
-      break unless play_again?
-    end
   end
 
   # TODO: Move as much of this to Display as possible
@@ -76,4 +64,5 @@ class Game
   end
 end
 
-Game.new.play_game
+# TODO: Add round number per guess
+# TODO: Add more computer functionality to display.
