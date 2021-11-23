@@ -34,6 +34,7 @@ class GameLoop
   end
 
   def loop_computer_master(master_code)
+    round_message(@computer.score)
     puts query_message[:guess_code_query]
     code_guess = user.gets_code_input
     response_hash = guess_response(master_code, code_guess)
@@ -56,10 +57,6 @@ class GameLoop
     end
   end
 
-  def play_user_master_round_test
-    puts 'This is a placeholder'
-  end
-
   # TODO: Contemplate Refactor
   def play_user_master_round
     puts query_message[:create_code_query]
@@ -69,13 +66,14 @@ class GameLoop
     return result if game_over?(@user.score, master_code, result[:guess])
 
     loop do
-      result = subsequent_loops_user_master(master_code, result[:guess], result[:response])
       @user.increment_score
+      result = subsequent_loops_user_master(master_code, result[:guess], result[:response])
       break if game_over?(@user.score, master_code, result[:guess])
     end
   end
 
   def first_loop_user_master(master_code)
+    round_message(@user.score)
     code_guess = computer.solve_code
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
@@ -87,6 +85,7 @@ class GameLoop
   end
 
   def subsequent_loops_user_master(master_code, guess, response)
+    round_message(@user.score)
     code_guess = computer.solve_code(guess, response)
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)

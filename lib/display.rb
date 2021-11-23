@@ -39,7 +39,8 @@ module Display
   def computer_message(message = nil)
     {
       create_code: 'The computer has created a code for you to guess.',
-      computer_guess: "The computer has guessed #{message}"
+      computer_guess: "The computer has guessed #{message}",
+      continue_message: 'Press Enter to continue.'
     }
   end
 
@@ -54,6 +55,10 @@ module Display
     puts "Perfect Matches: #{response[:matches]}"
     puts "Imperfect Matches: #{response[:imp_matches]}"
     puts "None: #{response[:none]}"
+  end
+
+  def round_message(round_number)
+    puts "Round Number: #{round_number}"
   end
 
   def score_display(user_score, computer_score)
