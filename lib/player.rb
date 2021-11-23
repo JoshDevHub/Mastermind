@@ -2,16 +2,16 @@
 
 # Player Class for holding logic related to players
 class Player
-  attr_accessor :score, :name
+  # TODO: Consider name and its usefulness?
+  attr_accessor :name
+  attr_reader :score
 
   def initialize(name)
     @name = name
     @score = 0
   end
-end
 
-# test
-# my_player = Player.new('Josh')
-# my_player.extend CodeMaster
-# my_code = my_player.make_code
-# p my_code
+  def increment_score
+    @score += 1
+  end
+end
