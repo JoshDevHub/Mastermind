@@ -29,6 +29,11 @@ class GameLoop
 
   private
 
+  def continue
+    puts 'Press enter to continue.'
+    gets.chomp
+  end
+
   def game_over?(number, master_code, code_guess)
     master_code == code_guess || number == 12
   end
@@ -78,6 +83,7 @@ class GameLoop
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
     round_feedback_message(response_hash)
+    continue
     {
       guess: code_guess,
       response: response_hash
@@ -90,6 +96,7 @@ class GameLoop
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
     round_feedback_message(response_hash)
+    continue
     {
       guess: code_guess,
       response: response_hash
