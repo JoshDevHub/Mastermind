@@ -47,12 +47,12 @@ class GameLoop
   def play_computer_master_round
     master_code = computer.create_master_code
     puts computer_message[:create_code]
-    @computer.score += 1
+    @computer.increment_score
     loop do
       guess = loop_computer_master(master_code)[:guess]
       break if game_over?(@computer.score, master_code, guess)
 
-      @computer.score += 1
+      @computer.increment_score
     end
   end
 
@@ -64,19 +64,18 @@ class GameLoop
   def play_user_master_round
     puts query_message[:create_code_query]
     master_code = user.gets_code_input
-    @user.score += 1
+    @user.increment_score
     result = first_loop_user_master(master_code)
     return result if game_over?(@user.score, master_code, result[:guess])
 
     loop do
       result = subsequent_loops_user_master(master_code, result[:guess], result[:response])
-      @user.score += 1
+      @user.increment_score
       break if game_over?(@user.score, master_code, result[:guess])
     end
   end
 
   def first_loop_user_master(master_code)
-    # binding.pry
     code_guess = computer.solve_code
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
@@ -88,7 +87,6 @@ class GameLoop
   end
 
   def subsequent_loops_user_master(master_code, guess, response)
-    # binding.pry
     code_guess = computer.solve_code(guess, response)
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
