@@ -40,4 +40,19 @@ class UserPlayer < Player
   def valid_yes_no_input?(input)
     %w[y n].include?(input)
   end
+
+  def input_username
+    puts query_message[:username_query]
+    self.name = gets_user_input
+  end
+
+  def master_first?
+    puts query_message[:order_query]
+    gets_yes_no_input == 'y'
+  end
+
+  def play_again?
+    puts query_message[:play_again_query]
+    gets_yes_no_input == 'y'
+  end
 end
