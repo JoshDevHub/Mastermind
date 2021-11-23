@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-# Reponse Module for responding to a code guess.
+# Reponse Module for generating a response to a code guess. Compares two codes
+# and outputs a response hash telling how similar the two codes are.
 module RespondToCode
-  # TODO: Refactor this mess
   def guess_response(code_to_check, guess)
-    matches = guess.map.with_index { |element, index| element == code_to_check[index] || element }
-    match_count = matches.count(true)
-    match_feed = matches.reject.with_index { |element, index| element == true }
-    code_clone = code_to_check.reject.with_index { |element, index| element == guess[index] }
-    imp_matches = find_imperfect_matches(match_feed, code_clone)
+    filtered_code = code_to_check.reject.with_index { |element, index| element == guess[index] }
+    filtered_guess = guess.reject.with_index { |element, index| element == code_to_check[index] }
+    match_count = code_to_check.length - filtered_code.length
+    imp_matches = find_imperfect_matches(filtered_guess, filtered_code)
     {
       matches: match_count,
       imp_matches: imp_matches,
