@@ -8,7 +8,7 @@ class GameLoop
   include Display
   include RespondToCode
 
-  attr_reader :computer, :user
+  attr_reader :computer, :user, :user_master
 
   def initialize(user:, computer:, user_master:)
     @user = user
@@ -17,7 +17,7 @@ class GameLoop
   end
 
   def play_round
-    if @user_master
+    if user_master
       play_user_master_round
     else
       play_computer_master_round
@@ -36,7 +36,7 @@ class GameLoop
   end
 
   def loop_computer_master(master_code)
-    round_message(@computer.score)
+    round_message(computer.score)
     puts query_message[:guess_code_query]
     code_guess = user.gets_code_input
     response_hash = guess_response(master_code, code_guess)
@@ -50,30 +50,30 @@ class GameLoop
   def play_computer_master_round
     master_code = computer.create_master_code
     puts computer_message[:create_code]
-    @computer.increment_score
+    computer.increment_score
     loop do
       guess = loop_computer_master(master_code)[:guess]
-      break if game_over?(@computer.score, master_code, guess)
+      break if game_over?(computer.score, master_code, guess)
 
-      @computer.increment_score
+      computer.increment_score
     end
   end
 
   def play_user_master_round
-    master_code = @user.create_code
-    @user.increment_score
+    master_code = user.create_code
+    user.increment_score
     result = first_loop_user_master(master_code)
-    return result if game_over?(@user.score, master_code, result[:guess])
+    return result if game_over?(user.score, master_code, result[:guess])
 
     loop do
-      @user.increment_score
+      user.increment_score
       result = subsequent_loops_user_master(master_code, result[:guess], result[:response])
-      break if game_over?(@user.score, master_code, result[:guess])
+      break if game_over?(user.score, master_code, result[:guess])
     end
   end
 
   def first_loop_user_master(master_code)
-    round_message(@user.score)
+    round_message(user.score)
     code_guess = computer.solve_code
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)
@@ -86,7 +86,7 @@ class GameLoop
   end
 
   def subsequent_loops_user_master(master_code, guess, response)
-    round_message(@user.score)
+    round_message(user.score)
     code_guess = computer.solve_code(guess, response)
     puts computer_message(code_guess.join)[:computer_guess]
     response_hash = guess_response(master_code, code_guess)

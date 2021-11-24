@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Display Module that holds logic for the command line UI
+# Display Module that holds messages used in the command line UI
 module Display
   @@rules = <<~HEREDOC
     The rules are as follows: the game has two roles: a Code Master and a

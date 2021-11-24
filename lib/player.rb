@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Player Class for holding logic related to players
+# Player Class for holding player score
 class Player
   attr_reader :score
 

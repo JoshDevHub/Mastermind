@@ -2,6 +2,10 @@
 
 A command-line game of [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game)) built using Ruby.
 
+## Live Preview
+
+Try out the game on [replit](https://replit.com/@jmsmith1018/Mastermind#README.md)
+
 ## How to Play
 
 Clone this repo and run `$ruby main.rb` or, more conveniently, visit the replit I've setup.
@@ -15,6 +19,8 @@ My version is slightly altered from the traditional board game version of Master
     - None indicates digits that aren't present in the code at all.
 - For each round of guessing, the Code Master gains 1 point. When the Code Breaker gets the code correct OR the game has reached 12 rounds in length, the game will end and the players will switch roles and play a new game.
 - After the second game, the player with the most points wins!
+
+In this game, the two players are always the user and a "computer" player that I've built. See if you can beat it :stuck_out_tongue:
 
 ## Special Thanks
 
