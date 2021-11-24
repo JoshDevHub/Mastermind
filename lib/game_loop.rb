@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
 require_relative 'display'
-require_relative 'computer_player'
-require_relative 'user_player'
 require_relative 'respond_to_code'
 
 # Game Loop class that runs the code guessing loop for the game.
@@ -62,10 +59,8 @@ class GameLoop
     end
   end
 
-  # TODO: Contemplate Refactor
   def play_user_master_round
-    puts query_message[:create_code_query]
-    master_code = user.gets_code_input
+    master_code = @user.create_code
     @user.increment_score
     result = first_loop_user_master(master_code)
     return result if game_over?(@user.score, master_code, result[:guess])
