@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
 require_relative 'user_player'
 require_relative 'computer_player'
 require_relative 'display'
@@ -13,7 +12,7 @@ class Game
   include Display
 
   def initialize
-    setup('User')
+    setup
   end
 
   def play_game
@@ -33,25 +32,24 @@ class Game
 
   def start_game
     introduction_message
-    @user_player.input_username
+    puts 'Press Enter to start the game!'
+    gets.chomp
   end
 
-  def setup(user_name = 'User')
-    @user_player = UserPlayer.new(user_name)
-    @computer_player = ComputerPlayer.new('Computer')
+  def setup
+    @user_player = UserPlayer.new
+    @computer_player = ComputerPlayer.new
   end
 
   def reset
-    setup(@user_player.name)
+    setup
   end
 
-  # TODO: Move as much of this to Display as possible
   def between_games
     score_display(user_player.score, computer_player.score)
     puts 'The players will now switch sides.'
   end
 
-  # TODO: Move as much of this to Display as possible
   def end_game
     score_display(user_player.score, computer_player.score)
     if user_player.score > computer_player.score
@@ -63,6 +61,3 @@ class Game
     end
   end
 end
-
-# TODO: Add round number per guess
-# TODO: Add more computer functionality to display.

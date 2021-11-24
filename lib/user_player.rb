@@ -55,4 +55,9 @@ class UserPlayer < Player
     puts query_message[:play_again_query]
     gets_yes_no_input == 'y'
   end
+
+  def create_code
+    puts query_message[:create_code_query]
+    gets_code_input
+  end
 end
