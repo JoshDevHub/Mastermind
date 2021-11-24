@@ -11,8 +11,8 @@ class ComputerPlayer < Player
 
   attr_reader :possibility_space, :code_array
 
-  def initialize(name)
-    super(name)
+  def initialize
+    super
     @code_array = (1..6).to_a.map(&:to_s)
     @possibility_space = populate_possibility_space
   end
