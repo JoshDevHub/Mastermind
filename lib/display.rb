@@ -53,7 +53,6 @@ module Display
     puts "Perfect Matches: #{response[:matches]}"
     puts "Imperfect Matches: #{response[:imp_matches]}"
     puts "None: #{response[:none]}"
-    puts 'Correct Guess!' if response[:matches] == 4
     puts "\n"
   end
 

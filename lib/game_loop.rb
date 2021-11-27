@@ -32,6 +32,8 @@ class GameLoop
   end
 
   def game_over?(number, master_code, code_guess)
+    puts 'Correct guess!' if master_code == code_guess
+    puts "You've reached the maximum number of guesses. The code was #{master_code.join}." if number == 12
     master_code == code_guess || number == 12
   end
 
